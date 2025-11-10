@@ -72,7 +72,7 @@ class _SearchPageState extends State<SearchPage> {
                 onPressed: () async {
                   final query = _searchTextController.text.trim();
                   await _controller.search(searchTerm: query);
-                  NavigatorSingleton.I.pushNamed(
+                  NavigatorSingleton.I.pushNamedAndRemoveUntil(
                     '/results',
                     arguments: state.searchResponse,
                   );

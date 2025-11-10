@@ -33,7 +33,16 @@ class _ResultsPageState extends State<ResultsPage> {
         return Scaffold(
           backgroundColor: UiColors.bgSoft,
           appBar: AppBar(
-            title: Text(response?.searchTerm ?? 'Results'),
+            leading: IconButton(
+              onPressed: () {
+                NavigatorSingleton.I.pop();
+              },
+              icon: Icon(Icons.arrow_back_ios_new_rounded),
+            ),
+            title: Text(
+              response?.searchTerm ?? 'Results',
+              style: UiTextStyle.body16(),
+            ),
             centerTitle: true,
           ),
           body: SafeArea(
@@ -66,7 +75,7 @@ class _ResultsPageState extends State<ResultsPage> {
                               // decoration: TextDecoration.underline,
                             ),
                           ),
-                          subtitle: Text(item.url ?? '', maxLines: 2,),
+                          subtitle: Text(item.url ?? '', maxLines: 2),
                           onTap: () async {
                             await _openUrl(item.url);
                           },
