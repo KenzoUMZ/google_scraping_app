@@ -6,7 +6,11 @@ Aplicativo Flutter para realizar buscas na internet e exibir resultados de forma
 
 - Flutter SDK 3.29.0 ou superior
 - Dart SDK
-- Android Studio / Xcode (para desenvolvimento mobile)
+- Android Studio (para desenvolvimento Android)
+  - Android SDK
+  - Emulador Android configurado
+- Xcode (para desenvolvimento iOS - apenas macOS)
+  - Simulador iOS
 - FVM (opcional, para gerenciamento de versões do Flutter)
 
 ## Instalação
