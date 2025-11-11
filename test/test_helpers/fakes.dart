@@ -1,6 +1,6 @@
-import 'package:google_scraping_app/core/core.dart';
-import 'package:google_scraping_app/layers/data_layer/repository/search/i_search_repository.dart';
-import 'package:google_scraping_app/layers/domain_layer/domain_layer.dart';
+import 'package:bing_scraping_app/core/core.dart';
+import 'package:bing_scraping_app/layers/data_layer/repository/search/i_search_repository.dart';
+import 'package:bing_scraping_app/layers/domain_layer/domain_layer.dart';
 
 class FakeSearchRepository implements ISearchRepository {
   FakeSearchRepository({this.shouldFail = false, this.response});

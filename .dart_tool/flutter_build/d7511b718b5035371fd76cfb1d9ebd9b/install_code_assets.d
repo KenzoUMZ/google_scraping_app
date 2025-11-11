@@ -1,1 +1,1 @@
- /Users/kenzo_umezawa/Documents/Code/Personal/web-scraping-project/google_scraping_app/.dart_tool/flutter_build/d7511b718b5035371fd76cfb1d9ebd9b/native_assets.json: 
+ /Users/kenzo_umezawa/Documents/Code/Personal/web-scraping-project/bing_scraping_app/.dart_tool/flutter_build/d7511b718b5035371fd76cfb1d9ebd9b/native_assets.json: 

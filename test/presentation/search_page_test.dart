@@ -1,9 +1,9 @@
+import 'package:bing_scraping_app/core/components/buttons/ui_button.dart';
+import 'package:bing_scraping_app/core/core.dart';
+import 'package:bing_scraping_app/layers/domain_layer/domain_layer.dart';
+import 'package:bing_scraping_app/layers/presentation_layer/search/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:google_scraping_app/core/components/buttons/ui_button.dart';
-import 'package:google_scraping_app/core/core.dart';
-import 'package:google_scraping_app/layers/domain_layer/domain_layer.dart';
-import 'package:google_scraping_app/layers/presentation_layer/search/search_page.dart';
 
 import '../test_helpers/fakes.dart';
 
@@ -12,7 +12,6 @@ void main() {
 
   group('SearchPage widget', () {
     setUp(() {
-      // Register a fake controller dependency
       final fakeRepo = FakeSearchRepository();
       if (GetIt.I.isRegistered<SearchInternetController>()) {
         GetIt.I.unregister<SearchInternetController>();

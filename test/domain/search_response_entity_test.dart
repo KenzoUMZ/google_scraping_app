@@ -1,5 +1,5 @@
+import 'package:bing_scraping_app/layers/domain_layer/entities/search/search_response_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:google_scraping_app/layers/domain_layer/entities/search/search_response_entity.dart';
 
 void main() {
   group('SearchResponseEntity.fromJson', () {

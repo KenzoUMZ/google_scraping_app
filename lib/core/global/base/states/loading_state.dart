@@ -1,8 +1,8 @@
-// import '../../global.dart';
+import '../../global.dart';
 
-// class LoadingState extends BaseState {
-//   const LoadingState();
+class LoadingState extends BaseState {
+  const LoadingState();
 
-//   @override
-//   List<Object?> get props => [];
-// }
+  @override
+  List<Object?> get props => [];
+}

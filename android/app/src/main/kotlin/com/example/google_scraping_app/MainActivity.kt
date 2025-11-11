@@ -1,4 +1,4 @@
-package com.example.google_scraping_app
+package com.example.bing_scraping_app
 
 import io.flutter.embedding.android.FlutterActivity
 

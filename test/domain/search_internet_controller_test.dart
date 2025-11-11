@@ -1,6 +1,6 @@
+import 'package:bing_scraping_app/core/core.dart';
+import 'package:bing_scraping_app/layers/domain_layer/domain_layer.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:google_scraping_app/core/core.dart';
-import 'package:google_scraping_app/layers/domain_layer/domain_layer.dart';
 
 import '../test_helpers/fakes.dart';
 
@@ -16,8 +16,8 @@ void main() {
 
       final controller = SearchInternetController(searchRepository: fakeRepo);
 
-  expect(controller.state.searchState, isA<BaseState>());
-  expect(controller.state.searchResponse, isA<SearchResponseEntity>());
+      expect(controller.state.searchState, isA<BaseState>());
+      expect(controller.state.searchResponse, isA<SearchResponseEntity>());
 
       await controller.search(searchTerm: 'flutter');
 
@@ -31,8 +31,7 @@ void main() {
 
       await controller.search(searchTerm: 'x');
 
-      // searchState becomes FailureState
-  expect(controller.state.searchState, isA<FailureState>());
+      expect(controller.state.searchState, isA<FailureState>());
     });
   });
 }

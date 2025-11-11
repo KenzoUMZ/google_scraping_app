@@ -746,13 +746,13 @@
       "languageVersion": "3.2"
     },
     {
-      "name": "google_scraping_app",
+      "name": "bing_scraping_app",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     }
   ],
-  "generated": "2025-11-10T21:21:14.502308Z",
+  "generated": "2025-11-11T05:00:01.511976Z",
   "generator": "pub",
   "generatorVersion": "3.7.0",
   "flutterRoot": "file:///Users/kenzo_umezawa/fvm/versions/3.29.0",

@@ -72,7 +72,6 @@ class _ResultsPageState extends State<ResultsPage> {
                             item.title ?? item.url ?? 'No title',
                             style: UiTextStyle.body16(
                               color: UiColors.secondaryBase,
-                              // decoration: TextDecoration.underline,
                             ),
                           ),
                           subtitle: Text(item.url ?? '', maxLines: 2),
