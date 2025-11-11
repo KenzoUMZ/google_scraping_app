@@ -122,4 +122,9 @@ class PrimitiveColors {
   static const Color alphaPurple8 = Color.fromARGB(20, 132, 49, 247);
   static const Color alphaPurple16 = Color.fromARGB(40, 132, 49, 247);
   static const Color alphaPurple24 = Color.fromARGB(60, 132, 49, 247);
+
+  /// [Gradients]
+  static const Color gradientStart = Color(0xFF00A9E3);
+  static const Color gradientMiddle = Color(0xFF157EC6);
+  static const Color gradientEnd = Color(0xFF225FB3);
 }

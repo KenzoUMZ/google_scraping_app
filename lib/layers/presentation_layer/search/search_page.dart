@@ -41,18 +41,16 @@ class _SearchPageState extends State<SearchPage> {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ImageController(
-                'assets/images/google_logo_large.svg',
-                width: 240,
-              ),
+              ImageController(UiIcons.logoLarge, width: 200),
               const Gap(32),
               UiTextFormField(
                 prefixIcon: ImageController(
-                  'assets/images/google_logo_small.png',
-                ).addMargin(const EdgeInsets.all(6)),
+                  UiIcons.logoSmall,
+                ).addMargin(const EdgeInsets.all(10)),
                 controller: _searchTextController,
                 placeholder: 'Search',
                 withShadow: true,
+                textCapitalization: TextCapitalization.sentences,
               ),
               const Gap(24),
               UiButton(
@@ -70,10 +68,11 @@ class _SearchPageState extends State<SearchPage> {
                 backgroundColor: UiColors.bgWhite,
                 borderColor: UiColors.strokeMuted,
                 isDisabled: isButtonDisabled,
+                showAnimatedBorder: isButtonDisabled ? false : true,
                 onPressed: () async {
                   final query = _searchTextController.text.trim();
                   await _controller.search(searchTerm: query);
-                  NavigatorSingleton.I.pushNamedAndRemoveUntil(
+                  NavigatorSingleton.I.pushNamed(
                     '/results',
                     arguments: state.searchResponse,
                   );

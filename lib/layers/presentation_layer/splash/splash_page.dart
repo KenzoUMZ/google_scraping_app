@@ -31,13 +31,7 @@ class _SplashPageState extends State<SplashPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: ImageController(
-          'assets/images/google_logo_small.png',
-          height: 150,
-          width: 150,
-        ),
-      ),
+      body: Center(child: ImageController(UiIcons.logoLarge, width: 200)),
     );
   }
 }

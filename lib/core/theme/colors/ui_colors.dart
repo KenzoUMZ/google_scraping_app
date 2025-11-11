@@ -81,4 +81,11 @@ class UiColors {
   ///[Static]
   static const Color staticWhite = PrimitiveColors.neutral0;
   static const Color staticSoft = PrimitiveColors.neutral100;
+
+  ///[Gradients]
+  static const List<Color> gradientPrimary = [
+    PrimitiveColors.gradientStart,
+    PrimitiveColors.gradientMiddle,
+    PrimitiveColors.gradientEnd,
+  ];
 }

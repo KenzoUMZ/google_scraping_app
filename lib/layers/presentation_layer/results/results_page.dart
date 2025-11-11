@@ -5,6 +5,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/core.dart';
 import '../../domain_layer/domain_layer.dart';
+import 'widgets/blurred_app_bar.dart';
+import 'widgets/search_result_tile.dart';
 
 class ResultsPage extends StatefulWidget {
   const ResultsPage({super.key});
@@ -32,19 +34,8 @@ class _ResultsPageState extends State<ResultsPage> {
         final results = response?.results ?? [];
         return Scaffold(
           backgroundColor: UiColors.bgSoft,
-          appBar: AppBar(
-            leading: IconButton(
-              onPressed: () {
-                NavigatorSingleton.I.pop();
-              },
-              icon: Icon(Icons.arrow_back_ios_new_rounded),
-            ),
-            title: Text(
-              response?.searchTerm ?? 'Results',
-              style: UiTextStyle.body16(),
-            ),
-            centerTitle: true,
-          ),
+          extendBodyBehindAppBar: true,
+          appBar: BlurredAppBar(title: response?.searchTerm ?? 'Results'),
           body: SafeArea(
             child:
                 results.isEmpty
@@ -66,15 +57,10 @@ class _ResultsPageState extends State<ResultsPage> {
                       separatorBuilder: (context, index) => Gap(8),
                       itemBuilder: (_, index) {
                         final item = results[index];
-                        return ListTile(
-                          tileColor: UiColors.bgWhite,
-                          title: Text(
-                            item.title ?? item.url ?? 'No title',
-                            style: UiTextStyle.body16(
-                              color: UiColors.secondaryBase,
-                            ),
-                          ),
-                          subtitle: Text(item.url ?? '', maxLines: 2),
+                        final normalizedUrl = UrlUtils.normalizeUrl(item.url);
+                        return SearchResultTile(
+                          title: item.title ?? normalizedUrl ?? 'No title',
+                          subtitle: normalizedUrl,
                           onTap: () async {
                             await _openUrl(item.url);
                           },
@@ -90,7 +76,10 @@ class _ResultsPageState extends State<ResultsPage> {
 
 extension on _ResultsPageState {
   Future<void> _openUrl(String? url) async {
-    if (url == null || url.isEmpty) {
+    // Normaliza a URL primeiro
+    final normalizedUrl = UrlUtils.normalizeUrl(url);
+
+    if (normalizedUrl == null || normalizedUrl.isEmpty) {
       if (mounted) {
         ScaffoldMessenger.of(
           context,
@@ -99,8 +88,8 @@ extension on _ResultsPageState {
       return;
     }
 
-    final uri = Uri.tryParse(url);
-    if (uri == null) {
+    final uri = Uri.tryParse(normalizedUrl);
+    if (uri == null || !UrlUtils.isValidUrl(normalizedUrl)) {
       if (mounted) {
         ScaffoldMessenger.of(
           context,

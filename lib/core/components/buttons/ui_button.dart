@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zo_animated_border/zo_animated_border.dart';
 
 import '../../core.dart';
 
@@ -23,6 +24,10 @@ class UiButton extends StatefulWidget {
     this.style,
     this.height = 56,
     this.width,
+    this.showAnimatedBorder = false,
+    this.gradientColors = UiColors.gradientPrimary,
+    this.borderRadius = 8.0,
+    this.gradientAnimationDuration = const Duration(seconds: 1),
   });
 
   const UiButton.secondary({
@@ -44,6 +49,10 @@ class UiButton extends StatefulWidget {
     this.style,
     this.height = 56,
     this.width,
+    this.showAnimatedBorder = false,
+    this.gradientColors = UiColors.gradientPrimary,
+    this.borderRadius = 8.0,
+    this.gradientAnimationDuration = const Duration(seconds: 1),
   });
 
   const UiButton.outlined({
@@ -65,6 +74,10 @@ class UiButton extends StatefulWidget {
     this.style,
     this.height = 56,
     this.width,
+    this.showAnimatedBorder = false,
+    this.gradientColors = UiColors.gradientPrimary,
+    this.borderRadius = 8.0,
+    this.gradientAnimationDuration = const Duration(seconds: 1),
   });
 
   const UiButton.danger({
@@ -86,6 +99,10 @@ class UiButton extends StatefulWidget {
     this.style,
     this.height = 56,
     this.width,
+    this.showAnimatedBorder = false,
+    this.gradientColors = UiColors.gradientPrimary,
+    this.borderRadius = 8.0,
+    this.gradientAnimationDuration = const Duration(seconds: 1),
   });
 
   const UiButton.success({
@@ -107,6 +124,10 @@ class UiButton extends StatefulWidget {
     this.style,
     this.height = 56,
     this.width,
+    this.showAnimatedBorder = false,
+    this.gradientColors = UiColors.gradientPrimary,
+    this.borderRadius = 8.0,
+    this.gradientAnimationDuration = const Duration(seconds: 1),
   });
 
   final String label;
@@ -126,6 +147,10 @@ class UiButton extends StatefulWidget {
   final ButtonStyle? style;
   final double height;
   final double? width;
+  final bool? showAnimatedBorder;
+  final List<Color> gradientColors;
+  final double borderRadius;
+  final Duration gradientAnimationDuration;
 
   Widget buildIcon(dynamic icon, EdgeInsets padding, Color color) {
     if (icon == null) return const SizedBox();
@@ -175,80 +200,92 @@ class _UiButtonState extends State<UiButton> {
         onTapCancel: () {
           setState(() => _isPressed = false);
         },
-        child: SizedBox(
-          height: widget.height,
-          width: widget.width,
-          child: ElevatedButton(
-            onPressed:
-                (!widget.isDisabled && !widget.isLoading)
-                    ? widget.onPressed
-                    : widget.disabledOnPressed,
-            style: ElevatedButton.styleFrom(
-              splashFactory: InkRipple.splashFactory,
-              overlayColor: UiColors.strokeStrong,
-            ).merge(
-              baseStyle.copyWith(
-                backgroundColor: MaterialStateProperty.resolveWith<Color?>((
-                  states,
-                ) {
-                  if (widget.isDisabled) {
-                    return widget.disabledBackgroundColor ??
+        child: ZoAnimatedGradientBorder(
+          gradientColor:
+              widget.showAnimatedBorder == true
+                  ? widget.gradientColors
+                  : [Colors.transparent],
+          borderRadius: widget.borderRadius,
+          animationDuration: widget.gradientAnimationDuration,
+          child: SizedBox(
+            height: widget.height,
+            width: widget.width,
+            child: ElevatedButton(
+              onPressed:
+                  (!widget.isDisabled && !widget.isLoading)
+                      ? widget.onPressed
+                      : widget.disabledOnPressed,
+              style: ElevatedButton.styleFrom(
+                splashFactory: InkRipple.splashFactory,
+                overlayColor: UiColors.strokeStrong,
+              ).merge(
+                baseStyle.copyWith(
+                  backgroundColor: WidgetStateProperty.resolveWith<Color?>((
+                    states,
+                  ) {
+                    if (widget.isDisabled) {
+                      return widget.disabledBackgroundColor ??
+                          baseStyle.backgroundColor?.resolve(states);
+                    }
+                    return widget.backgroundColor ??
                         baseStyle.backgroundColor?.resolve(states);
-                  }
-                  return widget.backgroundColor ??
-                      baseStyle.backgroundColor?.resolve(states);
-                }),
-                shadowColor: MaterialStateProperty.all<Color?>(
-                  widget.shadowColor,
-                ),
-                alignment: widget.labelAlign,
-                shape: MaterialStateProperty.all<OutlinedBorder>(
-                  widget.borderColor != null
-                      ? RoundedRectangleBorder(
-                        side: BorderSide(color: widget.borderColor!),
-                        borderRadius: BorderRadius.circular(8),
-                      )
-                      : RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
+                  }),
+                  shadowColor: WidgetStateProperty.all<Color?>(
+                    widget.shadowColor,
+                  ),
+                  alignment: widget.labelAlign,
+                  shape: WidgetStateProperty.all<OutlinedBorder>(
+                    widget.borderColor != null
+                        ? RoundedRectangleBorder(
+                          side: BorderSide(color: widget.borderColor!),
+                          borderRadius: BorderRadius.circular(
+                            widget.borderRadius,
+                          ),
+                        )
+                        : RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                            widget.borderRadius,
+                          ),
+                        ),
+                  ),
                 ),
               ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Visibility(
-                  visible: widget.prefixIcon != null && !widget.isLoading,
-                  child: widget.buildIcon(
-                    widget.prefixIcon,
-                    const EdgeInsets.only(right: 8),
-                    effectiveLabelColor,
-                  ),
-                ),
-                Visibility(
-                  visible: !widget.isLoading,
-                  replacement: const SizedBox(
-                    width: 35,
-                    height: 35,
-                    child: CircularProgressIndicator(color: Colors.white),
-                  ),
-                  child: Text(
-                    widget.label,
-                    style: UiTextStyle.body16(
-                      color: effectiveLabelColor,
-                      fontWeight: FontWeight.bold,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Visibility(
+                    visible: widget.prefixIcon != null && !widget.isLoading,
+                    child: widget.buildIcon(
+                      widget.prefixIcon,
+                      const EdgeInsets.only(right: 8),
+                      effectiveLabelColor,
                     ),
                   ),
-                ),
-                Visibility(
-                  visible: widget.suffixIcon != null && !widget.isLoading,
-                  child: widget.buildIcon(
-                    widget.suffixIcon,
-                    const EdgeInsets.only(left: 8),
-                    effectiveLabelColor,
+                  Visibility(
+                    visible: !widget.isLoading,
+                    replacement: const SizedBox(
+                      width: 35,
+                      height: 35,
+                      child: CircularProgressIndicator(color: Colors.white),
+                    ),
+                    child: Text(
+                      widget.label,
+                      style: UiTextStyle.body16(
+                        color: effectiveLabelColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                  Visibility(
+                    visible: widget.suffixIcon != null && !widget.isLoading,
+                    child: widget.buildIcon(
+                      widget.suffixIcon,
+                      const EdgeInsets.only(left: 8),
+                      effectiveLabelColor,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

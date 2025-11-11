@@ -8,9 +8,8 @@ class AppTheme {
   static ThemeData light() {
     final base = ThemeData.light();
     return base.copyWith(
-      useMaterial3: true,
       scaffoldBackgroundColor: UiColors.bgWhite,
-      primaryColor: UiColors.primaryBase,
+      primaryColor: UiColors.bgWhite,
       colorScheme: ColorScheme.fromSeed(
         seedColor: UiColors.primaryBase,
         brightness: Brightness.light,
@@ -20,8 +19,6 @@ class AppTheme {
         onSecondary: UiColors.textWhite,
         error: UiColors.dangerMain,
         onError: UiColors.textWhite,
-        background: UiColors.bgWhite,
-        onBackground: UiColors.textDarker,
         surface: UiColors.bgWhite,
         onSurface: UiColors.textDark,
       ),
@@ -38,7 +35,10 @@ class AppTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: const BorderSide(color: UiColors.strokeStrong, width: 1.5),
+          borderSide: const BorderSide(
+            color: UiColors.strokeStrong,
+            width: 1.5,
+          ),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
